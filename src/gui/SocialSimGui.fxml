@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.chart.StackedAreaChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.RadioMenuItem?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#keyPressed" onKeyReleased="#keyReleased" prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.SocialSimController">
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="50.0" style="-fx-background-color: Black;" BorderPane.alignment="CENTER">
+         <children>
+            <HBox fx:id="_simulateControls3" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="40.0" prefWidth="250.0" spacing="5.0" style="-fx-background-color: MINTCREAM; -fx-background-radius: 50;">
+               <children>
+                  <Button fx:id="_resetButton" mnemonicParsing="false" onMousePressed="#resetPressed" onMouseReleased="#reset" style="-fx-background-color: MintCream; -fx-background-radius: 10; -fx-border-color: Black; -fx-border-radius: 10;" text="Reset" />
+                  <Button fx:id="_startButton" mnemonicParsing="false" onAction="#start" onMousePressed="#startPressed" onMouseReleased="#start" style="-fx-background-color: MintCream; -fx-border-color: Black; -fx-border-radius: 10;" text="Play" />
+                  <Button fx:id="_stopButton" mnemonicParsing="false" onMousePressed="#stopPressed" onMouseReleased="#stop" style="-fx-background-color: MintCream; -fx-border-color: Black; -fx-border-radius: 10;" text="Pause">
+                     <font>
+                        <Font name="Verdana" size="13.0" />
+                     </font></Button>
+                  <Button fx:id="_stepButton" mnemonicParsing="false" onMousePressed="#stepPressed" onMouseReleased="#step" style="-fx-background-color: MintCream; -fx-border-color: Black; -fx-border-radius: 10;" text="Step">
+                     <font>
+                        <Font name="Verdana" size="13.0" />
+                     </font></Button>
+               </children>
+            </HBox>
+         </children>
+      </HBox>
+   </bottom>
+   <top>
+      <StackPane prefHeight="50.0" style="-fx-background-color: Black;" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: MintCream; -fx-background-radius: 50; -fx-border-color: Black;" StackPane.alignment="CENTER">
+               <children>
+                  <MenuButton fx:id="_mode" mnemonicParsing="false" style="-fx-background-color: MintCream; -fx-border-color: Black; -fx-border-radius: 20;" text="Mode">
+                     <items>
+                        <RadioMenuItem fx:id="_simulate" disable="true" mnemonicParsing="false" onAction="#selectSimulate" selected="true" text="Simulate" />
+                        <RadioMenuItem fx:id="_draw" mnemonicParsing="false" onAction="#selectDraw" text="Draw" />
+                        <RadioMenuItem fx:id="_play" mnemonicParsing="false" onAction="#selectPlay" text="Play" />
+                        <RadioMenuItem fx:id="_file" mnemonicParsing="false" onAction="#selectFile" text="Save/Load" />
+                        <RadioMenuItem fx:id="_help" mnemonicParsing="false" onAction="#selectHelp" text="Info" />
+                     </items>
+                  </MenuButton>
+               </children>
+               <StackPane.margin>
+                  <Insets />
+               </StackPane.margin>
+            </HBox>
+            <Button fx:id="_quitButton" mnemonicParsing="false" onMousePressed="#quitPressed" onMouseReleased="#quit" style="-fx-background-color: White; -fx-background-radius: 10; -fx-border-color: Black; -fx-border-radius: 10;" text="Quit" StackPane.alignment="CENTER_LEFT">
+               <StackPane.margin>
+                  <Insets left="20.0" />
+               </StackPane.margin>
+            </Button>
+         </children>
+      </StackPane>
+   </top>
+   <left>
+      <StackPane alignment="TOP_CENTER" prefHeight="400.0" prefWidth="300.0" style="-fx-background-color: Black;" BorderPane.alignment="TOP_CENTER">
+         <children>
+            <VBox fx:id="_simulateControls1" alignment="TOP_CENTER" prefHeight="398.0" prefWidth="304.0" spacing="5.0" style="-fx-border-color: MintCream; -fx-border-radius: 10; -fx-border-width: 2; -fx-border-insets: 5;">
+               <children>
+                  <Label fx:id="_tickLabel" text="Ticks: " textFill="WHITE">
+                     <font>
+                        <Font name="Verdana" size="12.0" />
+                     </font>
+                  </Label>
+                  <VBox alignment="CENTER" prefHeight="87.0" prefWidth="270.0" spacing="5.0" style="-fx-border-color: MintCream; -fx-border-radius: 10; -fx-border-width: 2;">
+                     <children>
+                        <Label text="Quarantine Distance" textFill="WHITE">
+                           <font>
+                              <Font name="Verdana" size="12.0" />
+                           </font>
+                        </Label>
+                        <HBox alignment="CENTER" prefHeight="53.0" prefWidth="220.0">
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="53.0" prefWidth="115.0">
+                                 <children>
+                                    <Label text="All" textFill="WHITE">
+                                       <font>
+                                          <Font name="Verdana" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Slider fx:id="_distanceSlider" majorTickUnit="150.0" max="600.0" minorTickCount="1" onMouseDragged="#setDistance" onMouseReleased="#setDistance" showTickLabels="true" showTickMarks="true" value="300.0" />
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER" prefHeight="53.0" prefWidth="115.0">
+                                 <children>
+                                    <Label text="Infected" textFill="WHITE">
+                                       <font>
+                                          <Font name="Verdana" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Slider fx:id="_distanceInfectedSlider" majorTickUnit="150.0" max="600.0" minorTickCount="1" onMouseDragged="#setInfectedDistance" onMouseReleased="#setInfectedDistance" showTickLabels="true" showTickMarks="true" value="150.0" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-border-color: White; -fx-border-width: 2; -fx-border-radius: 10; -fx-padding: 5;">
+                     <children>
+                        <VBox alignment="CENTER" prefHeight="44.0" prefWidth="140.0" spacing="5.0">
+                           <children>
+                              <Label text="Infection Chance (%)" textFill="WHITE">
+                                 <font>
+                                    <Font name="Verdana" size="11.0" />
+                                 </font>
+                              </Label>
+                              <Spinner fx:id="_infectionChanceSpinner" editable="true" prefHeight="27.0" prefWidth="75.0" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="86.0" prefWidth="131.0" spacing="5.0">
+                           <children>
+                              <Label prefHeight="15.0" prefWidth="134.0" text="Death Chance (.01%)" textFill="WHITE" textOverrun="CLIP">
+                                 <font>
+                                    <Font name="Verdana" size="11.0" />
+                                 </font>
+                              </Label>
+                              <Spinner fx:id="_deathChanceSpinner" editable="true" prefHeight="27.0" prefWidth="75.0" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <VBox alignment="CENTER" prefHeight="87.0" prefWidth="268.0" spacing="5.0" style="-fx-border-color: White; -fx-border-radius: 10; -fx-border-width: 2; -fx-padding: 5;">
+                     <children>
+                        <Label text="Recovery Time (sec)" textFill="WHITE">
+                           <font>
+                              <Font name="Verdana" size="12.0" />
+                           </font>
+                        </Label>
+                        <Slider fx:id="_recoverySlider" majorTickUnit="2.0" max="16.0" min="2.0" onMouseDragged="#setRecovery" onMouseReleased="#setRecovery" showTickLabels="true" showTickMarks="true" value="8.0" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="62.0" prefWidth="266.0" spacing="5.0" style="-fx-border-color: White; -fx-border-width: 2; -fx-border-radius: 10; -fx-padding: 5;">
+                     <children>
+                        <Label text="Vaccine Progress" textFill="WHITE">
+                           <font>
+                              <Font name="Verdana" size="12.0" />
+                           </font>
+                        </Label>
+                        <ProgressBar fx:id="_vaccineProgressBar" prefWidth="200.0" progress="0.0" />
+                     </children>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+               </padding>
+            </VBox>
+            <VBox fx:id="_drawControls" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0" style="-fx-border-color: White; -fx-border-width: 2; -fx-border-radius: 10; -fx-border-insets: 5;" visible="false">
+               <children>
+                  <ColorPicker fx:id="_colorPicker" promptText="Choose a Color" style="-fx-background-color: White;" />
+                  <Button fx:id="_clearButton" mnemonicParsing="false" onMousePressed="#clearPressed" onMouseReleased="#clear" style="-fx-background-color: MintCream; -fx-background-radius: 10; -fx-border-color: Black; -fx-border-radius: 10;" text="Clear" />
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="10.0" right="10.0" top="20.0" />
+               </padding>
+               <StackPane.margin>
+                  <Insets />
+               </StackPane.margin>
+            </VBox>
+            <VBox fx:id="_fileControls" prefHeight="200.0" prefWidth="100.0" style="-fx-border-color: White; -fx-border-width: 2; -fx-border-radius: 10; -fx-border-insets: 5;" visible="false">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+                     <children>
+                        <TextField fx:id="_fileTextField" promptText="Enter a Filepath" />
+                        <Button fx:id="_saveButton" mnemonicParsing="false" onMousePressed="#savePressed" onMouseReleased="#save" style="-fx-background-color: MintCream; -fx-background-radius: 10; -fx-border-color: Black; -fx-border-radius: 10;" text="Save" />
+                        <Button fx:id="_loadButton" mnemonicParsing="false" onMousePressed="#loadPressed" onMouseReleased="#load" style="-fx-background-color: MintCream; -fx-background-radius: 10; -fx-border-color: Black; -fx-border-radius: 10;" text="Load" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </StackPane>
+   </left>
+   <right>
+      <StackPane prefHeight="400.0" prefWidth="300.0" style="-fx-background-color: Black;" BorderPane.alignment="CENTER">
+         <children>
+            <VBox fx:id="_simulateControls2" alignment="TOP_CENTER" prefHeight="380.0" prefWidth="150.0" spacing="5.0" style="-fx-border-color: MintCream; -fx-border-radius: 10; -fx-border-width: 2; -fx-border-insets: 5;">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="50.0" prefWidth="270.0" style="-fx-border-color: MintCream; -fx-border-radius: 10; -fx-border-width: 2; -fx-padding: 5;">
+                     <children>
+                        <Label text="Radius" textFill="WHITE">
+                           <font>
+                              <Font name="Verdana" size="12.0" />
+                           </font>
+                        </Label>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <Label text="Visual" textFill="WHITE">
+                                       <font>
+                                          <Font name="Verdana" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Slider fx:id="_sizeSlider" majorTickUnit="2.0" max="10.0" min="2.0" minorTickCount="1" onMouseDragged="#setSize" onMouseReleased="#setSizeReleased" showTickLabels="true" showTickMarks="true" value="6.0" />
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <Label text="Multiplier" textFill="WHITE">
+                                       <font>
+                                          <Font name="Verdana" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Slider fx:id="_multiplierSlider" majorTickUnit="1.0" max="6.0" min="2.0" minorTickCount="1" onMouseDragged="#setMultiplier" onMouseReleased="#setMultiplier" showTickLabels="true" showTickMarks="true" value="3.0" />
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <Label text="Infection" textFill="WHITE">
+                                       <font>
+                                          <Font name="Verdana" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Slider fx:id="_infectionRadiusSlider" blockIncrement="0.0" majorTickUnit="28.0" max="60.0" min="4.0" minorTickCount="2" onMouseDragged="#setInfectionRadius" onMouseReleased="#setInfectionRadius" showTickLabels="true" showTickMarks="true" value="18.0" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="104.0" prefWidth="267.0" style="-fx-border-color: MintCream; -fx-border-width: 2; -fx-border-radius: 10; -fx-padding: 5;">
+                     <children>
+                        <Label text="Mask" textFill="WHITE">
+                           <font>
+                              <Font name="Verdana" size="12.0" />
+                           </font>
+                        </Label>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <Label text="Effectiveness" textFill="WHITE">
+                                       <font>
+                                          <Font name="Verdana" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Slider fx:id="_maskEffectivenessSlider" majorTickUnit="1.0" max="3.0" min="1.0" minorTickCount="1" onMouseDragged="#setMaskEffectiveness" onMouseReleased="#setMaskEffectiveness" showTickLabels="true" showTickMarks="true" value="2.0" />
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <Label text="Percentage" textFill="WHITE">
+                                       <font>
+                                          <Font name="Verdana" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Slider fx:id="_maskPercentageSlider" minorTickCount="2" onMouseDragged="#setMaskPercentage" onMouseReleased="#setMaskPercentageReleased" showTickLabels="true" showTickMarks="true" value="50.0" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="163.0" prefWidth="268.0" style="-fx-border-color: MintCream; -fx-border-width: 2; -fx-border-radius: 10; -fx-padding: 5;">
+                     <children>
+                        <Label text="Vaccine" textFill="WHITE">
+                           <font>
+                              <Font name="Verdana" size="12.0" />
+                           </font>
+                        </Label>
+                        <HBox alignment="CENTER" prefHeight="53.0" prefWidth="266.0" spacing="15.0">
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <Label text="Effectiveness" textFill="WHITE">
+                                       <font>
+                                          <Font name="Verdana" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Slider fx:id="_vaccineEffectivenessSlider" majorTickUnit="1.0" max="3.0" min="1.0" minorTickCount="1" onMouseDragged="#setMaskEffectiveness" onMouseReleased="#setMaskEffectiveness" showTickLabels="true" showTickMarks="true" value="2.0" />
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <Label text="Speed (Ticks)" textFill="WHITE">
+                                       <font>
+                                          <Font name="Verdana" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Spinner fx:id="_vaccineSpeedSpinner" editable="true" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="53.0" prefWidth="266.0">
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="52.0" prefWidth="154.0" spacing="2.0">
+                                 <children>
+                                    <Label text="Distribution Chance (%)" textFill="WHITE">
+                                       <font>
+                                          <Font name="Verdana" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Spinner fx:id="_vaccineDistributionSpinner" editable="true" prefHeight="27.0" prefWidth="124.0" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="101.0" prefWidth="267.0" spacing="5.0" style="-fx-border-color: MintCream; -fx-border-radius: 10; -fx-border-width: 2; -fx-padding: 5;">
+                     <children>
+                        <Label text="Initial Population" textFill="WHITE">
+                           <font>
+                              <Font name="Verdana" size="12.0" />
+                           </font>
+                        </Label>
+                        <HBox alignment="CENTER" prefHeight="53.0" prefWidth="220.0">
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="53.0" prefWidth="115.0">
+                                 <children>
+                                    <Label text="Total" textFill="WHITE">
+                                       <font>
+                                          <Font name="Verdana" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Spinner fx:id="_totalPopulationSpinner" editable="true" prefHeight="27.0" prefWidth="75.0" />
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER" prefHeight="53.0" prefWidth="115.0">
+                                 <children>
+                                    <Label text="Infected" textFill="WHITE">
+                                       <font>
+                                          <Font name="Verdana" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Spinner fx:id="_infectedPopulationSpinner" editable="true" prefHeight="27.0" prefWidth="75.0" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="5.0" />
+                     </padding>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="101.0" prefWidth="267.0" spacing="5.0" style="-fx-border-color: MintCream; -fx-border-radius: 10; -fx-border-width: 2; -fx-padding: 5;">
+                     <children>
+                        <Label text="Speed" textFill="WHITE">
+                           <font>
+                              <Font name="Verdana" size="12.0" />
+                           </font>
+                        </Label>
+                        <HBox alignment="CENTER" prefHeight="53.0" prefWidth="220.0" />
+                        <Slider fx:id="_speedSlider" majorTickUnit="1.0" max="5.0" min="1.0" onMouseDragged="#setSpeed" onMouseReleased="#setSpeed" prefHeight="40.0" prefWidth="236.0" showTickLabels="true" showTickMarks="true" value="2.0">
+                           <padding>
+                              <Insets left="20.0" right="20.0" />
+                           </padding>
+                        </Slider>
+                     </children>
+                     <padding>
+                        <Insets bottom="5.0" />
+                     </padding>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+               </padding>
+            </VBox>
+            <VBox fx:id="_chartBox" alignment="CENTER" prefHeight="380.0" prefWidth="429.0" style="-fx-border-color: White; -fx-border-radius: 10; -fx-border-width: 2; -fx-border-insets: 5; -fx-padding: 5;" visible="false">
+               <children>
+                  <StackedAreaChart fx:id="_stackedAreaChart" animated="false" createSymbols="false" legendSide="LEFT" prefHeight="214.0" prefWidth="278.0">
+                    <xAxis>
+                      <NumberAxis fx:id="_stackedAreaChartX" animated="false" autoRanging="false" minorTickCount="2" side="BOTTOM" tickLabelFill="WHITE" tickUnit="50.0" upperBound="1000.0" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis side="LEFT" tickLabelFill="WHITE" upperBound="0.0" />
+                    </yAxis>
+                  </StackedAreaChart>
+                  <BarChart fx:id="_barChart" alternativeColumnFillVisible="true" animated="false" barGap="0.0" categoryGap="0.0" horizontalZeroLineVisible="false" legendSide="LEFT" prefHeight="193.0" prefWidth="298.0" verticalGridLinesVisible="false">
+                    <xAxis>
+                      <CategoryAxis animated="false" endMargin="10.0" startMargin="10.0" tickLabelFill="WHITE" tickLabelRotation="45.0" tickLabelsVisible="false">
+                           <tickLabelFont>
+                              <Font name="Helvetica" size="12.0" />
+                           </tickLabelFont>
+                        </CategoryAxis>
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis fx:id="_barChartY" animated="false" minorTickCount="2" side="LEFT" tickLabelFill="WHITE" />
+                    </yAxis>
+                  </BarChart>
+                  <PieChart fx:id="_pieChart" animated="false" labelsVisible="false" legendSide="LEFT" prefHeight="54.0" prefWidth="234.0" snapToPixel="false" titleSide="BOTTOM" />
+               </children>
+               <StackPane.margin>
+                  <Insets />
+               </StackPane.margin>
+            </VBox>
+         </children>
+      </StackPane>
+   </right>
+   <center>
+      <Pane fx:id="_world" prefHeight="400.0" prefWidth="500.0" style="-fx-background-color: beige;">
+         <children>
+            <TextArea fx:id="_helpTextArea" editable="false" prefHeight="500.0" prefWidth="600.0" visible="false">
+               <font>
+                  <Font name="Verdana" size="14.0" />
+               </font>
+            </TextArea>
+         </children></Pane>
+       </center>
+</BorderPane>
